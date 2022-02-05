@@ -4,7 +4,9 @@ import { Testing } from "cdktf";
 
 import "cdktf/lib/testing/adapters/jest";
 
-import { TF, Stack, Instance } from "@unit-testing/local";
+import * as Instance from "@unit-testing/local";
+
+import { TF, Stack } from "@unit-testing/local"
 
 /// import * as Docker from "./../.gen/providers/docker/container";
 

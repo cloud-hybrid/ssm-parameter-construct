@@ -8,7 +8,7 @@ import { Construct } from "constructs";
 import { App, TerraformStack, TerraformOutput, TerraformOutputConfig } from "cdktf";
 
 import { ID } from "./utility";
-import { HTTP, VCS } from "./remote/gitlab";
+import { Gitlab, VCS } from "./backend/gitlab";
 import { Tagging, Input, Defaults } from "./tags";
 import { Credentials, Credential } from "./credentials";
 
@@ -37,11 +37,11 @@ class Configuration extends Construct {
     readonly region: string;
 
     /*** The Remote State Backend Type - A Construct Wrapper */
-    readonly backend: HTTP;
+    readonly backend: Gitlab;
     /*** The Remote State Backend - Used to Track Infrastructure State Across Team(s) & Organizations */
     readonly remote: VCS;
 
-    constructor(scope: Construct, name: string, identifiers: Tagging, backend: HTTP, credentials: Credential = Credentials) {
+    constructor(scope: Construct, name: string, identifiers: Tagging, backend: Gitlab, credentials: Credential = Credentials) {
         super( scope, ID( [ name, "Configuration" ].join( "-" ) ) );
 
         this.identifiers = identifiers;
@@ -118,7 +118,9 @@ const Initialize = async function () {
 
     /// assert.match(environment, RegExp("(Development)|(QA)|(Staging)|(UAT)|(Production)"));
 
-    const backend = await HTTP.initialize( environment as "Development" | "QA" | "Staging" | "UAT" | "Production", id );
+    const backend = await Gitlab.initialize( environment as "Development" | "QA" | "Staging" | "UAT" | "Production", id );
+
+    Reflect.set(Initialize, "settings", Settings);
 
     return (scope: Construct, name: string) => new Configuration( scope, name, tags, backend, Credentials );
 };

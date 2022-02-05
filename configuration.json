@@ -1,13 +1,10 @@
 {
-    "cloud": "AWS",
     "tf": "True",
     "cfn": "False",
-    "creator": "CDK-TF",
+    "cloud": "AWS",
+    "creator": "",
+    "service": "",
     "environment": "Development",
-    "service": "Test",
     "organization": "Cloud-Technology",
-    "vcs": {
-        "id": 160,
-        "repository": "https://git-vcs.server.io/repository.git"
-    }
+    "vcs": {"id": 0, "type": "Gitlab", "repository": "https://git-vcs.server.io/repository.git"}
 }

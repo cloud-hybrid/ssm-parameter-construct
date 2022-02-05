@@ -4,7 +4,6 @@
     "projectId": "8f9df91a-2ed3-4636-942f-dcbaadb53a9b",
     "terraformProviders": [
         "null",
-        "docker",
         "aws"
     ],
     "output": "distribution",

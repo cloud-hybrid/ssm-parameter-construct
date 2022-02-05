@@ -31,7 +31,8 @@
         "@cloud-technology/secrets-manager-client": "latest",
         "cdktf": "^0.9.0",
         "constructs": "latest",
-        "inquirer": "latest"
+        "inquirer": "latest",
+        "@cloud-technology/parameter": "latest"
     },
     "devDependencies": {
         "@aws-sdk/credential-providers": "^3.49.0",

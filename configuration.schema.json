@@ -2,26 +2,41 @@
     "title": "configuration",
     "$schema": "http://json-schema.org/draft-07/schema",
     "id": "configuration.schema.json",
-    "required": ["cloud", "tf", "cfn", "creator", "environment", "service", "organization", "vcs"],
+    "required": ["tf", "cfn", "cloud", "creator", "service", "environment", "organization", "vcs"],
     "description": "Auto generated JSON schema based on the 'configuration' file",
     "type": "object",
     "properties": {
-        "cloud": {
-            "type": "string",
-            "description": "Cloud Provider",
-            "default": "AWS"
-        },
         "tf": {
             "type": "string",
+            "description": "Terraform Control Indicator",
             "enum": [
                 "True",
                 "False"
             ], "default": "True"
         },
+        "cfn": {
+            "type": "string",
+            "description": "Cloudformation Control Indicator",
+            "enum": [
+                "True",
+                "False"
+            ], "default": "False"
+        },
+        "cloud": {
+            "type": "string",
+            "description": "Cloud Provider",
+            "enum": [
+                "AWS", "Azure", "GCP", "Digital-Ocean", null
+            ],
+            "default": "AWS"
+        },
         "creator": {
             "type": "string",
-            "description": "Deployment Initializer, Human or Team-Identifiable Name",
-            "default": "CDK-TF"
+            "description": "Deployment Initializer, Human or Team-Identifiable Name"
+        },
+        "service": {
+            "$ref": "#/definitions/non-empty-string",
+            "description": "Deployment Common-Name or Descriptive Service"
         },
         "environment": {
             "type": "string",
@@ -34,33 +49,31 @@
                 "Production"
             ], "default": "Development"
         },
-        "service": {
-            "$ref": "#/definitions/non-empty-string",
-            "description": "Deployment Common-Name or Descriptive Service"
-        },
         "organization": {
             "type": "string",
             "default": "Cloud-Technology"
         },
         "vcs": {
             "type": "object",
+            "description": "Git Provider",
+            "required": [
+                "id", "type", "repository"
+            ],
             "properties": {
                 "id": {
                     "$ref": "#/definitions/non-negative-integer-default",
                     "description": "Repository or Project Identifier"
                 },
+                "type": {
+                    "$ref": "#/definitions/vcs-provider",
+                    "description": "Public or Private Git-related System"
+                },
                 "repository": {
                     "$ref": "#/definitions/non-empty-vcs-url",
+                    "description": "Git URI",
                     "format": "uri-reference"
                 }
             }
-        },
-        "cfn": {
-            "type": "string",
-            "enum": [
-                "True",
-                "False"
-            ], "default": "False"
         }
     },
     "definitions": {
@@ -82,6 +95,13 @@
         "non-negative-integer": {
             "type": "integer",
             "minimum": 0
+        },
+        "vcs-provider": {
+            "type": "string",
+            "default": "Gitlab",
+            "enum": [
+                "Gitlab", "Github"
+            ]
         },
         "non-negative-integer-default": {
             "allOf": [

@@ -1,4 +1,6 @@
-import { AWS, Application, TF, Output, Construct, Configuration, ID, Initialize, Initializer } from "./configuration";
+import { Application, TF, Construct, Configuration, ID, Initialize, Initializer } from "./configuration";
+
+import { Resource as Parameter } from "./ssm-parameter";
 
 class Stack extends TF {
     configuration: Configuration;
@@ -7,33 +9,29 @@ class Stack extends TF {
         super( scope, ID( name ) );
         this.configuration = settings( this, name );
 
-        const parameter = new AWS.ssm.SsmParameter( this, "test-ssm-parameter", {
-            name: "/test/test/test/test", overwrite: true, dataType: "text", type: "String", value: "H3ll0 W0r1d"
-        } );
-
-        Output(this, ID([name, "Node-ID"].join("-")), {
-            value: this.node.id
-        });
-
-        Output(this, ID([name, "Stack-Name"].join("-")), {
-            value: name
-        });
-
-        Output(this, ID([name, "SSM-Parameter", "ARN"].join("-")), {
-            value: parameter.arn
+        new Parameter(this, name, {
+            id: "Test-1",
+            type: "String",
+            name: "/test/parameter/1",
+            value: "H31l0 W0rlD",
+            force: true
         });
     }
 }
 
-const application = new Application( {
-    skipValidation: false,
-    stackTraces: true
-} );
+export { TF, Stack };
 
-const Instance = new Stack( application, "Test", await Initialize() );
+export default (async () => await Initialize().then(($) => {
+    const configuration: typeof import("./../configuration.json") = Reflect.get(Initialize, "settings");
 
-application.synth();
+    const application = new Application( {
+        skipValidation: false,
+        stackTraces: true
+    } );
 
-export { TF, Stack, Instance };
+    const instance = new Stack(application, configuration.service, $);
 
-export default Instance;
+    application.synth();
+
+    return instance;
+}))();

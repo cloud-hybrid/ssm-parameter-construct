@@ -1,4 +1,5 @@
 import { HttpBackend } from "cdktf";
+
 import { Construct } from "constructs";
 
 import { Client } from "../secrets-manager";
@@ -13,7 +14,7 @@ enum Environment {
 
 type Environments = keyof typeof Environment;
 
-interface Gitlab {
+interface Input {
     /*** Gitlab Username - Defaults to "NPM-TF-User" */
     readonly Username?: "NPM-TF-User" | string | undefined;
 
@@ -69,15 +70,15 @@ interface Defaults {
     skipCertVerification: false;
 }
 
-class HTTP implements Gitlab {
+class Gitlab implements Input {
     settings?: Remote;
     environment?: Environments;
 
-    readonly Username: Gitlab["Username"];
-    readonly Token: Gitlab["Token"];
-    readonly Hostname: Gitlab["Hostname"];
-    readonly API: Gitlab["API"];
-    readonly State: Gitlab["State"];
+    readonly Username: Input["Username"];
+    readonly Token: Input["Token"];
+    readonly Hostname: Input["Hostname"];
+    readonly API: Input["API"];
+    readonly State: Input["State"];
 
     readonly defaults?: Defaults = {
         lockMethod: "POST",
@@ -93,10 +94,10 @@ class HTTP implements Gitlab {
      * @param { Environments } environment
      * @param { number } project
      *
-     * @returns {Promise<HTTP>}
+     * @returns {Promise<Gitlab>}
      */
-    public static async initialize(environment: Environments, project: number): Promise<HTTP> {
-        const instance = new HTTP( await Client.get( HTTP.secret ) );
+    public static async initialize(environment: Environments, project: number): Promise<Gitlab> {
+        const instance = new Gitlab( await Client.get( Gitlab.secret ) );
 
         instance.environment = environment;
 
@@ -166,8 +167,8 @@ type Generic = any;
 
 type VCS = HttpBackend;
 
-export { HTTP };
+export { Gitlab };
 
-export default HTTP;
+export default Gitlab;
 
-export type { Gitlab, VCS };
+export type { VCS };
