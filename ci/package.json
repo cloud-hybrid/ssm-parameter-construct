@@ -1,0 +1,62 @@
+{
+    "name": "ci",
+    "private": true,
+    "version": "0.0.0",
+    "type": "module",
+    "main": "index.js",
+    "types": "index.d.ts",
+    "license": "BSD-2-Clause",
+    "author": "Jacob B. Sanders",
+    "scripts": {
+        "build": "tsc"
+    },
+    "dependencies": {
+        "ci": "."
+    },
+    "devDependencies": {
+        "@types/jest": "latest",
+        "@types/node": "latest",
+        "@unit-testing/local": ".",
+        "ts-jest": "latest",
+        "ts-node": "latest",
+        "tslib": "latest",
+        "typescript": "latest"
+    },
+    "eslintConfig": {
+        "parser": "@typescript-eslint/parser",
+        "plugins": [
+            "@typescript-eslint"
+        ],
+        "extends": [
+            "eslint:recommended",
+            "plugin:@typescript-eslint/eslint-recommended",
+            "plugin:@typescript-eslint/recommended"
+        ],
+        "rules": {
+            "no-case-declarations": 0,
+            "@typescript-eslint/no-explicit-any": 0,
+            "@typescript-eslint/explicit-function-return-type": 0,
+            "@typescript-eslint/no-use-before-define": 0,
+            "@typescript-eslint/no-empty-interface": 0,
+            "@typescript-eslint/explicit-module-boundary-types": 0,
+            "@typescript-eslint/no-empty-function": 0,
+            "@typescript-eslint/no-unused-vars": 0,
+            "@typescript-eslint/no-inferrable-types": 0,
+            "@typescript-eslint/ban-types": 0,
+            "@typescript-eslint/ban-ts-comment": 0,
+            "no-sequences": "error"
+        },
+        "ignorePatterns": [
+            "coverage",
+            "declarations",
+            "distribution",
+            "node_modules"
+        ]
+    },
+    "exports": {
+        ".": "./index.js"
+    },
+    "bin": {
+        "ci": "./index.js"
+    }
+}

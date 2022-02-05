@@ -1,0 +1,8 @@
+.tf
+
+.idea
+.vscode
+.eclipse
+
+coverage
+documentation

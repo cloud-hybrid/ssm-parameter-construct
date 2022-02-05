@@ -1,0 +1,114 @@
+{
+    "title": "configuration",
+    "$schema": "http://json-schema.org/draft-07/schema",
+    "id": "configuration.schema.json",
+    "required": ["cloud", "tf", "cfn", "creator", "environment", "service", "organization", "vcs"],
+    "description": "Auto generated JSON schema based on the 'configuration' file",
+    "type": "object",
+    "properties": {
+        "cloud": {
+            "type": "string",
+            "description": "Cloud Provider",
+            "default": "AWS"
+        },
+        "tf": {
+            "type": "string",
+            "enum": [
+                "True",
+                "False"
+            ], "default": "True"
+        },
+        "creator": {
+            "type": "string",
+            "description": "Deployment Initializer, Human or Team-Identifiable Name",
+            "default": "CDK-TF"
+        },
+        "environment": {
+            "type": "string",
+            "description": "Target Deployment Environment",
+            "enum": [
+                "Development",
+                "QA",
+                "Staging",
+                "UAT",
+                "Production"
+            ], "default": "Development"
+        },
+        "service": {
+            "$ref": "#/definitions/non-empty-string",
+            "description": "Deployment Common-Name or Descriptive Service"
+        },
+        "organization": {
+            "type": "string",
+            "default": "Cloud-Technology"
+        },
+        "vcs": {
+            "type": "object",
+            "properties": {
+                "id": {
+                    "$ref": "#/definitions/non-negative-integer-default",
+                    "description": "Repository or Project Identifier"
+                },
+                "repository": {
+                    "$ref": "#/definitions/non-empty-vcs-url",
+                    "format": "uri-reference"
+                }
+            }
+        },
+        "cfn": {
+            "type": "string",
+            "enum": [
+                "True",
+                "False"
+            ], "default": "False"
+        }
+    },
+    "definitions": {
+        "schema-array": {
+            "type": "array",
+            "minItems": 1,
+            "items": {"$ref": "#"}
+        },
+        "non-empty-string": {
+            "$comment": "Value Cannot be Empty",
+            "type": "string",
+            "minLength": 1
+        },
+        "non-empty-vcs-url": {
+            "type": "string",
+            "minLength": 1,
+            "default": "https://git-vcs.server.io/repository.git"
+        },
+        "non-negative-integer": {
+            "type": "integer",
+            "minimum": 0
+        },
+        "non-negative-integer-default": {
+            "allOf": [
+                {
+                    "$ref": "#/definitions/non-negative-integer"
+                },
+                {
+                    "default": 0
+                }
+            ]
+        },
+        "simple-types": {
+            "enum": [
+                "array",
+                "boolean",
+                "integer",
+                "null",
+                "number",
+                "object",
+                "string"
+            ]
+        },
+        "string-array": {
+            "type": "array",
+            "items": {"type": "string"},
+            "uniqueItems": true,
+            "default": []
+        }
+    }
+}

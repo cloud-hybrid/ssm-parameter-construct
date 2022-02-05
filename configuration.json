@@ -1,0 +1,13 @@
+{
+    "cloud": "AWS",
+    "tf": "True",
+    "cfn": "False",
+    "creator": "CDK-TF",
+    "environment": "Development",
+    "service": "Test",
+    "organization": "Cloud-Technology",
+    "vcs": {
+        "id": 160,
+        "repository": "https://git-vcs.server.io/repository.git"
+    }
+}

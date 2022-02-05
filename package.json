@@ -1,0 +1,53 @@
+{
+    "name": "api-gateway-construct",
+    "version": "1.0.0",
+    "main": "index.js",
+    "type": "module",
+    "types": "main.ts",
+    "private": true,
+    "scripts": {
+        "build": "tsc && echo",
+        "start": "npm run build && cdktf synth",
+        "debug": "cdktf synth --debug --trace-deprecation",
+        "compile": "tsc --pretty",
+        "watch": "tsc -w",
+        "test": "npm run build && node unit-testing",
+        "upload": "npm publish --access public",
+        "reinstall": "npm update && npm install --global --force",
+        "prepublishOnly": "npm install",
+        "test:watch": "jest --watch",
+        "upgrade": "npm i cdktf@latest cdktf-cli@latest",
+        "upgrade:next": "npm i cdktf@next cdktf-cli@next"
+    },
+    "engines": {
+        "node": ">=16.x"
+    },
+    "dependencies": {
+        "@cdktf/provider-aws": "latest",
+        "@cdktf/provider-docker": "latest",
+        "@cdktf/provider-github": "latest",
+        "@cdktf/provider-null": "latest",
+        "@cloud-technology/secrets-manager-client": "latest",
+        "cdktf": "^0.9.0",
+        "constructs": "latest",
+        "inquirer": "latest"
+    },
+    "devDependencies": {
+        "@aws-sdk/credential-providers": "^3.49.0",
+        "@aws-sdk/types": "^3.49.0",
+        "@cloud-technology/ci": "./ci",
+        "@jest/globals": "^27.4.6",
+        "@types/inquirer": "^8.2.0",
+        "@types/jest": "latest",
+        "@types/node": "latest",
+        "@unit-testing/local": ".",
+        "jest": "latest",
+        "ts-jest": "latest",
+        "ts-node": "latest",
+        "tslib": "latest",
+        "typescript": "latest"
+    },
+    "exports": {
+        ".": "./index.js"
+    }
+}
