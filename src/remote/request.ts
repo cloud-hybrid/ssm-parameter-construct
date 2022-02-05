@@ -65,14 +65,11 @@ const POST = (uri: string, data: string, headers = {}, resolve: Function, reject
             requestCert: true,
             followAllRedirects: true,
             encoding: "utf-8",
-            singleUse: false,
             agent: false,
-            path: "/",
             method: "POST",
             headers: {
                 ... {
-                    "Content-Type": "application/json",
-                    "Content-Length": Buffer.byteLength( data )
+                    "Content-Type": "application/json", "Content-Length": Buffer.byteLength( data )
                 }, ... headers
             }
         }, ... URI.urlToHttpOptions( new URL( uri ) )

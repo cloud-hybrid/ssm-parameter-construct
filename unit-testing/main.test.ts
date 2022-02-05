@@ -9,10 +9,10 @@ import { TF, Stack, Instance } from "@unit-testing/local";
 /// import * as Docker from "./../.gen/providers/docker/container";
 
 /// ==> https://cdk.tf/testing
-describe( "CDKTF Docker Application Unit-Test", () => {
+describe( "CDKTF Application Unit-Test", () => {
     it.todo( "@Task Example ..." );
 
-    console.log("[Log] Instance", Utility.inspect(Instance, { colors: true, showHidden: true, showProxy: true}));
+    /// console.log("[Log] Instance", Utility.inspect(Instance, { colors: true, showHidden: true, showProxy: true}));
 
     // All Unit tests test the synthesised terraform code, it does not create real-world resources
     /// describe( "Unit Test Assertions", () => {
