@@ -42,4 +42,4 @@ cdktf.out/**
 tsconfig.tsbuildinfo
 package-lock.json
 
-!./ci/index.js
+@types

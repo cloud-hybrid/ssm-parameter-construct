@@ -1,6 +1,7 @@
 {
-    "name": "api-gateway-construct",
+    "name": "@cloud-technology/ssm-parameter-construct",
     "version": "1.0.0",
+    "description": "Simple CDKTF AWS SSM Parameter IaC + Optional CLI Configurator",
     "main": "index.js",
     "type": "module",
     "types": "main.ts",
@@ -35,7 +36,6 @@
     "devDependencies": {
         "@aws-sdk/credential-providers": "^3.49.0",
         "@aws-sdk/types": "^3.49.0",
-        "@cloud-technology/ci": "./ci",
         "@jest/globals": "^27.4.6",
         "@types/inquirer": "^8.2.0",
         "@types/jest": "latest",

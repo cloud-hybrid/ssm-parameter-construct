@@ -1,5 +1,5 @@
 import { HttpBackend } from "cdktf";
-import { Construct } from "../configuration";
+import { Construct } from "constructs";
 
 import { Client } from "../secrets-manager";
 

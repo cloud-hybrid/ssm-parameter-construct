@@ -11,6 +11,14 @@ class Stack extends TF {
             name: "/test/test/test/test", overwrite: true, dataType: "text", type: "String", value: "H3ll0 W0r1d"
         } );
 
+        Output(this, ID([name, "Node-ID"].join("-")), {
+            value: this.node.id
+        });
+
+        Output(this, ID([name, "Stack-Name"].join("-")), {
+            value: name
+        });
+
         Output(this, ID([name, "SSM-Parameter", "ARN"].join("-")), {
             value: parameter.arn
         });
@@ -19,11 +27,10 @@ class Stack extends TF {
 
 const application = new Application( {
     skipValidation: false,
-    stackTraces: true,
-    outdir: "cdktf.out"
+    stackTraces: true
 } );
 
-const Instance = new Stack( application, "Test-Stack", await Initialize() );
+const Instance = new Stack( application, "Test", await Initialize() );
 
 application.synth();
 

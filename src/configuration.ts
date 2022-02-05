@@ -87,6 +87,10 @@ class Configuration extends Construct {
 type Inputs = typeof import("./../configuration.json");
 type Initializer = (scope: Construct, name: string) => Configuration;
 
+const Test = function(this: any){
+    this.test = true;
+}
+
 /***
  * Primary Application Entry-Point
  * ---
@@ -98,7 +102,7 @@ type Initializer = (scope: Construct, name: string) => Configuration;
  * @constructor
  *
  */
-const Initialize = async () => {
+const Initialize = async function () {
     const id = Settings.vcs.id;
     const environment = Settings.environment;
 
